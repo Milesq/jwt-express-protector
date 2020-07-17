@@ -1,24 +1,31 @@
 {
   "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:@typescript-eslint/recommended"],
   "settings": {
     "import/resolver": {
       "node": {
         "paths": ["./src"],
-        "extensions": [".js"]
+        "extensions": [".ts", ".js"]
       }
     }
   },
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "rules": {
     "prettier/prettier": "error",
     "prefer-const": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-console": "off"
   }
 }
