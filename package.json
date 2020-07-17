@@ -15,8 +15,10 @@
     "express",
     "protection"
   ],
+  "peerDependencies": {
+    "express": "^4.17.1"
+  },
   "dependencies": {
-    "express": "^4.17.1",
     "jwt": "^0.2.0"
   },
   "devDependencies": {
