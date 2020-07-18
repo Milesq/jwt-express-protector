@@ -1,10 +1,5 @@
-import * as express from 'express';
+import * as dotenv from 'dotenv';
 
-function createJWTProtector(options?: any): express.RequestHandler {
-  return (req, res, next) => {
-    console.log(req.url);
-    next();
-  };
-}
+dotenv.config();
 
-export default createJWTProtector;
+export * from './createJWTProtector';

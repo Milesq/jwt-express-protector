@@ -1,6 +1,10 @@
 import express from 'express'
 import request from 'supertest'
-import createJWTProtector from '../src/lib'
+import jwt from 'jsonwebtoken'
+import * as dotenv from 'dotenv'
+import createJWTProtector from '../src/createJWTProtector'
+
+dotenv.config()
 
 describe('createJWTProtector', () => {
   let app: express.Application
@@ -16,7 +20,7 @@ describe('createJWTProtector', () => {
     app = express()
 
     const jwtProtector = createJWTProtector({
-      secret: 'abc',
+      secret: process.env.SECRET,
       verifyToken,
     })
 
@@ -27,7 +31,6 @@ describe('createJWTProtector', () => {
 
   it('verifyToken is called', () => {
     expect(verifyToken).toBeCalled()
-    expect(3).toBe(3)
   })
 
   it('returns 401 when unauthorized', async () => {
@@ -37,7 +40,11 @@ describe('createJWTProtector', () => {
   it('returns 200 when authorized', async () => {
     await request(app)
       .get('/secret')
-      .auth('', { type: 'bearer' })
+      .auth(signJWT({ user: 'John' }), { type: 'bearer' })
       .expect(200)
   })
 })
+
+function signJWT(payload: object): string {
+  return jwt.sign(payload, process.env.SECRET)
+}
