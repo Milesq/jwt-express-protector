@@ -19,7 +19,8 @@
     "express": "^4.17.1"
   },
   "dependencies": {
-    "jwt": "^0.2.0"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
