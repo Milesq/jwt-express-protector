@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Milesq <wmilosz88@gmail.com>",
   "scripts": {
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --fix --ext .js,.ts",
     "test": "jest"
   },
