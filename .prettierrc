@@ -10,6 +10,7 @@
     {
       "files": "__tests__/**/*.[tj]s",
       "options": {
+        "printWidth": 60,
         "semi": false
       }
     }
