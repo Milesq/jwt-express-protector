@@ -1,21 +1,28 @@
 import { promisify } from 'util'
-import { src, series, dest } from 'gulp'
+import {
+  src,
+  series,
+  dest,
+  TaskFunction,
+  parallel,
+  watch,
+} from 'gulp'
 import babel from 'gulp-babel'
 import rimraf from 'rimraf'
 
 const DIST = 'dist/'
+const sourceFiles = 'src/**/*.[tj]s'
 
-async function clean() {
+export async function clean() {
   await promisify(rimraf)(DIST)
 }
 
-function build() {
-  return src('src/**/*.[tj]s')
-    .pipe(babel())
-    .pipe(dest(DIST))
+export const build: TaskFunction = () => {
+  return src(sourceFiles).pipe(babel()).pipe(dest(DIST))
 }
 
-// function dev() {}
+export const dev = parallel(build, function watchFiles() {
+  watch(sourceFiles, build)
+})
 
-export { build, /* dev, */ clean }
 export default series(clean, build)

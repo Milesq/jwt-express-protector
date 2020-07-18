@@ -1,5 +1,5 @@
 import * as express from 'express';
-import createJWTProtector from '../src/lib';
+import createJWTProtector from './lib';
 
 const app = express();
 const jwtProtector = createJWTProtector();
