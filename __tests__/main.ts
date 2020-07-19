@@ -1,7 +1,7 @@
 import express from 'express'
 import request from 'supertest'
 import jwt from 'jsonwebtoken'
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import createJWTProtector from '../src/createJWTProtector'
 
 dotenv.config()
