@@ -3,6 +3,6 @@ declare namespace Express {
     /**
      * Store user data returned from verifyUser
      */
-    user?: any;
+    user?: object | string;
   }
 }
