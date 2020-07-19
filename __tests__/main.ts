@@ -35,6 +35,16 @@ describe('createJWTProtector', () => {
 
   it('returns 401 when unauthorized', async () => {
     await request(app).get('/secret').expect(401)
+    await request(app)
+      .get('/secret')
+      .auth(jwt.sign({ user: 'John' }, 'random letters'), {
+        type: 'bearer',
+      })
+      .expect(401)
+    await request(app)
+      .get('/secret')
+      .auth('notJWT', { type: 'bearer' })
+      .expect(401)
   })
 
   it('returns 200 when authorized', async () => {
