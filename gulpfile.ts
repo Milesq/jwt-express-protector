@@ -1,4 +1,5 @@
 import { promisify } from 'util'
+import { exec } from 'child_process'
 import {
   src,
   series,
@@ -8,10 +9,12 @@ import {
 } from 'gulp'
 import nodemon from 'gulp-nodemon'
 import babel from 'gulp-babel'
-import rimraf from 'rimraf'
+import rimrafCb from 'rimraf'
+const rimraf = promisify(rimrafCb)
 
 const DIST = 'dist'
 const MAIN_EXAMPLE_FILE = 'example.js'
+const typesOut = 'types'
 const sourceFiles = 'src/**/*.[tj]s'
 
 // ████████╗ █████╗ ███████╗██╗  ██╗███████╗
@@ -22,7 +25,7 @@ const sourceFiles = 'src/**/*.[tj]s'
 //    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝
 
 export async function clean(): Promise<void> {
-  await promisify(rimraf)(DIST)
+  await rimraf(DIST)
 }
 
 export const build: TaskFunction = () => {
@@ -44,3 +47,10 @@ const watchFiles: TaskFunction = done => {
 export const dev = series(build, watchFiles)
 
 export default series(clean, build)
+
+export const declaration = series(clean, async () => {
+  await rimraf(typesOut)
+  await promisify(exec)('tsc --declaration')
+
+  src(`${DIST}/src/**/*.d.ts`).pipe(dest(typesOut))
+})
