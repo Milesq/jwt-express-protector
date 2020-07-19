@@ -29,13 +29,18 @@ export const build: TaskFunction = () => {
   return src(sourceFiles).pipe(babel()).pipe(dest(DIST))
 }
 
-export const dev = series(build, function watchFiles() {
+const watchFiles: TaskFunction = done => {
   watch(sourceFiles, build)
 
   nodemon({
     script: `${DIST}/${MAIN_EXAMPLE_FILE}`,
     env: { NODE_ENV: 'development' },
+    ext: 'js ts',
+    // @ts-ignore
+    done,
   })
-})
+}
+
+export const dev = series(build, watchFiles)
 
 export default series(clean, build)

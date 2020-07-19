@@ -29,6 +29,7 @@
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/ban-ts-comment": "off",
     "prefer-const": "warn",
     "no-unused-vars": "off",
     "no-console": "off"

@@ -6,6 +6,8 @@
   "license": "MIT",
   "author": "Milesq <wmilosz88@gmail.com>",
   "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --fix --ext .js,.ts",
     "test": "jest"
