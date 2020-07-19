@@ -7,3 +7,6 @@ Host: localhost:8080
 GET /secret HTTP/1.1
 Host: localhost:8080
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlci1uYW1lIiwiaWF0IjoxNTk1MTU0MzQ0fQ.PAOFVXuS4eshkgJCHElH0agvldS23veQ4DCglkbeL0s
+###
+GET /secret HTTP/1.1
+Host: localhost:8080
