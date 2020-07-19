@@ -20,7 +20,7 @@ const sourceFiles = 'src/**/*.[tj]s'
 //    ██║   ██║  ██║███████║██║  ██╗███████║
 //    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝
 
-export async function clean() {
+export async function clean(): Promise<void> {
   await promisify(rimraf)(DIST)
 }
 
