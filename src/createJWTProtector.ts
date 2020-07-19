@@ -1,14 +1,11 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import './utils';
 
 interface ProtectorOptions {
   secret: string;
   verifyUser?: (payload: object | string) => object | string;
 }
-
-Array.prototype.last = function () {
-  return this[this.length - 1];
-};
 
 function createJWTProtector(options: ProtectorOptions): express.RequestHandler {
   return (req, res, next) => {
