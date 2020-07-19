@@ -29,8 +29,14 @@ describe('createJWTProtector', () => {
     })
   })
 
-  xit('verifyUser is called', () => {
-    expect(verifyUser).toBeCalled()
+  it('verifyUser is called', async () => {
+    await request(app).get('/secret')
+    expect(verifyUser).not.toBeCalled()
+
+    await request(app)
+      .get('/secret')
+      .auth(signJWT({ user: 'John' }), { type: 'bearer' })
+    expect(verifyUser).toBeCalledTimes(1)
   })
 
   it('returns 401 when unauthorized', async () => {
