@@ -19,7 +19,7 @@ function createJWTProtector(options: ProtectorOptions): express.RequestHandler {
 
     try {
       const payload = jwt.verify(token, options?.secret);
-      req.user = options?.verifyUser ? options.verifyUser(payload) : payload;
+      req.user = options.verifyUser ? options.verifyUser(payload) : payload;
       next();
     } catch {
       _401();
