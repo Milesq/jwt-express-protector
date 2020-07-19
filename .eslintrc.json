@@ -10,6 +10,7 @@
     "prettier",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": "dist/",
   "settings": {
     "import/resolver": {
       "node": {
