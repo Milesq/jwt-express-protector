@@ -29,7 +29,7 @@ function createJWTProtector(
     try {
       // @ts-ignore: strictNullChecks
       const payload = jwt.verify(token, process.env.SECRET);
-      req.user = options?.verifyUser?.(payload);
+      req.user = options?.verifyUser ? options.verifyUser(payload) : payload;
       next();
     } catch {
       _401();
