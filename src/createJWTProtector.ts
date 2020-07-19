@@ -1,14 +1,15 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import './utils';
+import { PromiseVal } from './utils';
 
 interface ProtectorOptions {
   secret: string;
-  verifyUser?: (payload: object | string) => object | string;
+  verifyUser?: (payload: object | string) => PromiseVal<object | string>;
 }
 
 function createJWTProtector(options: ProtectorOptions): express.RequestHandler {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const token = req.get('Authorization')?.split(' ').last();
     const _401 = () => res.status(401).send('401 UNAUTHORIZED');
 
@@ -19,7 +20,12 @@ function createJWTProtector(options: ProtectorOptions): express.RequestHandler {
 
     try {
       const payload = jwt.verify(token, options?.secret);
-      req.user = options.verifyUser ? options.verifyUser(payload) : payload;
+      if (options.verifyUser) {
+        req.user = await options.verifyUser(payload);
+      } else {
+        req.user = payload;
+      }
+
       next();
     } catch {
       _401();
