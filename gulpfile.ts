@@ -4,13 +4,14 @@ import {
   series,
   dest,
   TaskFunction,
-  parallel,
   watch,
 } from 'gulp'
+import nodemon from 'gulp-nodemon'
 import babel from 'gulp-babel'
 import rimraf from 'rimraf'
 
-const DIST = 'dist/'
+const DIST = 'dist'
+const MAIN_EXAMPLE_FILE = 'example.js'
 const sourceFiles = 'src/**/*.[tj]s'
 
 // ████████╗ █████╗ ███████╗██╗  ██╗███████╗
@@ -28,8 +29,13 @@ export const build: TaskFunction = () => {
   return src(sourceFiles).pipe(babel()).pipe(dest(DIST))
 }
 
-export const dev = parallel(build, function watchFiles() {
+export const dev = series(build, function watchFiles() {
   watch(sourceFiles, build)
+
+  nodemon({
+    script: `${DIST}/${MAIN_EXAMPLE_FILE}`,
+    env: { NODE_ENV: 'development' },
+  })
 })
 
 export default series(clean, build)
