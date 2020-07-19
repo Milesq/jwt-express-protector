@@ -1,9 +1,8 @@
-/* eslint-disable */
 declare namespace Express {
   export interface Request {
     /**
-     * Store user data returned from verifyToken
+     * Store user data returned from verifyUser
      */
-    user?: string;
+    user?: any;
   }
 }
