@@ -1,6 +1,6 @@
 {
   "name": "jwt-express-protector",
-  "version": "1.0.1",
+  "version": "1.0.11",
   "description": "",
   "main": "dist/lib.js",
   "license": "MIT",
