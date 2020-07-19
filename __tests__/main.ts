@@ -6,6 +6,8 @@ import createJWTProtector from '../src/createJWTProtector'
 
 dotenv.config()
 
+const SECRET = process.env.SECRET || ''
+
 describe('createJWTProtector', () => {
   let app: express.Application
 
@@ -20,7 +22,7 @@ describe('createJWTProtector', () => {
     app = express()
 
     const jwtProtector = createJWTProtector({
-      secret: process.env.SECRET,
+      secret: SECRET,
       verifyUser,
     })
 
@@ -61,6 +63,37 @@ describe('createJWTProtector', () => {
   })
 })
 
+describe('async createJWTProtector', () => {
+  it('req.user is awaited when verifyUser returns Promise', async () => {
+    const app = express()
+
+    const verifyUser = jest.fn(() => Promise.resolve({}))
+
+    const jwtProtector = createJWTProtector({
+      secret: SECRET,
+      verifyUser,
+    })
+
+    let req: express.Request
+
+    app.get('/', jwtProtector, (_req, res) => {
+      res.send('content')
+      req = _req
+    })
+
+    await request(app)
+      .get('/')
+      .auth(signJWT({ user: 'John' }), { type: 'bearer' })
+      .expect(200)
+    /**
+     * verifyUser wasn't called
+     */
+    expect(verifyUser).toBeCalled()
+    // @ts-ignore
+    expect(req?.user).not.toBeInstanceOf(Promise)
+  })
+})
+
 function signJWT(payload: object): string {
-  return jwt.sign(payload, process.env.SECRET)
+  return jwt.sign(payload, SECRET)
 }
