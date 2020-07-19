@@ -7,7 +7,7 @@ describe('dotenv', () => {
 
   expectedVars.forEach(variable => {
     it('secret key exists', () => {
-      expect(env[variable]).toBeDefined()
+      expect(env?.[variable]).toBeDefined()
     })
   })
 })
