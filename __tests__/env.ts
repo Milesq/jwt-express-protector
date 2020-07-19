@@ -3,7 +3,11 @@ import dotenv from 'dotenv'
 const { parsed: env } = dotenv.config()
 
 describe('dotenv', () => {
-  it('secret key exists', () => {
-    expect(env.SECRET).toBeDefined()
+  const expectedVars = ['SECRET']
+
+  expectedVars.forEach(variable => {
+    it('secret key exists', () => {
+      expect(env[variable]).toBeDefined()
+    })
   })
 })
