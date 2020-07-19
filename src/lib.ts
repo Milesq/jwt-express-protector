@@ -1,1 +1,3 @@
-export { default } from './createJWTProtector';
+import createJWTProtector from './createJWTProtector';
+
+export default createJWTProtector;
