@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
-    "declaration": "gulp declaration",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --fix --ext .js,.ts",
     "test": "jest"
