@@ -1,11 +1,11 @@
 {
   "name": "jwt-express-protector",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "dist/lib.js",
   "license": "MIT",
   "author": "Milesq <wmilosz88@gmail.com>",
-  "types": "types",
+  "types": "types/lib.d.ts",
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp",
