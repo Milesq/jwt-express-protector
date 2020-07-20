@@ -1,4 +1,4 @@
-function last() {
+function last<T>(this: Array<T>): T {
   return this[this.length - 1];
 }
 
