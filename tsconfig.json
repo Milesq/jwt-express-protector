@@ -4,8 +4,10 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
+    "removeComments": true,
     "typeRoots": ["./typings", "./node_modules/@types"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true
   },
   "include": ["src/**/*", "__tests__"],
   "exclude": ["node_modules"]
