@@ -4,7 +4,7 @@
     "node": true
   },
   "plugins": ["prettier", "@typescript-eslint"],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
     "prettier",
