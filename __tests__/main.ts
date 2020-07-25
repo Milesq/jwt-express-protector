@@ -94,6 +94,29 @@ describe('async createJWTProtector', () => {
   })
 })
 
+test('createJWTProtector works with default verifyUser', async () => {
+  const app = express()
+
+  const jwtProtector = createJWTProtector({
+    secret: SECRET,
+  })
+
+  let req: express.Request
+
+  app.get('/', jwtProtector, (_req, res) => {
+    res.send('content')
+    req = _req
+  })
+
+  await request(app)
+    .get('/')
+    .auth(signJWT({ user: 'John' }), { type: 'bearer' })
+    .expect(200)
+
+  // @ts-ignore
+  expect(req.user?.user).toBe('John')
+})
+
 function signJWT(payload: object): string {
   return jwt.sign(payload, SECRET)
 }
