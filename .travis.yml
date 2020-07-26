@@ -8,7 +8,7 @@ before_script:
 
 script:
   - yarn build
-  - yarn lint
+  - yarn lint:fix
   - yarn test
 
 after_success:
