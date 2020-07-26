@@ -1,6 +1,8 @@
 import dotenv from 'dotenv'
 
-const { parsed: env } = dotenv.config()
+dotenv.config()
+
+const { env } = process
 
 describe('dotenv', () => {
   const expectedVars = ['SECRET']
