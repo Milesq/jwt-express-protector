@@ -1,12 +1,9 @@
 import express from 'express'
 import request from 'supertest'
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
 import createJWTProtector from '../src/createJWTProtector'
 
-dotenv.config()
-
-const SECRET = process.env.SECRET || ''
+const SECRET = process.env.SECRET || 'abc'
 
 describe('createJWTProtector', () => {
   let app: express.Application
