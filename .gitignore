@@ -2,4 +2,8 @@ node_modules/
 dist/
 *.env
 types/
+
+# tests files
 coverage/
+.stryker-tmp
+reports/
